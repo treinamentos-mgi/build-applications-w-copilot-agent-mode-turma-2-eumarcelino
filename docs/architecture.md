@@ -46,19 +46,24 @@ flowchart LR
 Registre seu plano aqui antes de editar o código.
 
 - Decisão da camada de apresentação:
-- Decisão da camada de lógica:
-- Decisão da camada de dados:
-- Abordagem para registro de atividades:
-- Abordagem para gerenciamento de equipes:
-- Abordagem para o placar:
-- Abordagem para sugestões de treino:
+- Decisão da camada de apresentação: React apresenta atividades, equipes, placar e sugestões; os componentes consomem a API pelo cliente compartilhado e exibem textos em português.
+- Decisão da camada de lógica: Express mantém rotas finas e delega validação de entrada e regras de negócio a serviços TypeScript, retornando erros 4xx intencionais.
+- Decisão da camada de dados: Mongoose define campos obrigatórios e referências entre pessoas, equipes e atividades; o seed usa chaves estáveis e upserts sem limpar registros existentes.
+- Abordagem para registro de atividades: validar IDs e existência das referências antes de salvar; calcular pontos e data no servidor e persistir usuário, equipe, tipo e duração.
+- Abordagem para gerenciamento de equipes: exigir nome e mascote, manter integrantes como referências com lista vazia por padrão e sincronizar associações ao mover uma pessoa.
+- Abordagem para o placar: somar os pontos das atividades por equipe, ordenar do maior total para o menor e atribuir posições iniciadas em 1.
+- Abordagem para sugestões de treino: localizar a pessoa pelo e-mail e recomendar treinos a partir da meta e das atividades recentes, explicando o motivo em português.
 
 ## Plano de testes
 
 Registre os comandos executados e o significado de cada falha.
 
-- Testes da camada de dados: `npm run test:data --prefix octofit-tracker/backend`
-- Testes da API: `npm run test:api --prefix octofit-tracker/backend`
-- Testes do frontend: `npm test --prefix octofit-tracker/frontend`
-- Compilação do backend: `npm run build --prefix octofit-tracker/backend`
-- Compilação do frontend: `npm run build --prefix octofit-tracker/frontend`
+- `npm ci --prefix octofit-tracker/backend`: concluído; instalou as dependências do backend.
+- `npm run test:data --prefix octofit-tracker/backend`: 5/5 testes passaram após a validação dos esquemas; a linha de base tinha 4 falhas de campos obrigatórios.
+- `node .github/scripts/grade-step.mjs step1-architecture`: aprovado após preencher as sete decisões e abordagens.
+- `node .github/scripts/grade-step.mjs step2-data`: aprovado após o grader passar a aceitar `idempotently` e `idempotente`; o contrato protegido permaneceu intacto.
+- `npm run seed --prefix octofit-tracker/backend`: executado duas vezes; ambas concluíram sem erro. O banco terminou com 2 pessoas, 2 equipes, 2 atividades e 2 treinos.
+- Compilação do backend: `npm run build --prefix octofit-tracker/backend` passou.
+- Testes da API: `npm run test:api --prefix octofit-tracker/backend` (pendente para a etapa 3).
+- Testes do frontend: `npm test --prefix octofit-tracker/frontend` (pendente para a etapa 4).
+- Compilação do frontend: `npm run build --prefix octofit-tracker/frontend` (pendente para a etapa 4).
