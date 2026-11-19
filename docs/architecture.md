@@ -62,8 +62,10 @@ Registre os comandos executados e o significado de cada falha.
 - `npm run test:data --prefix octofit-tracker/backend`: 5/5 testes passaram após a validação dos esquemas; a linha de base tinha 4 falhas de campos obrigatórios.
 - `node .github/scripts/grade-step.mjs step1-architecture`: aprovado após preencher as sete decisões e abordagens.
 - `node .github/scripts/grade-step.mjs step2-data`: aprovado após o grader passar a aceitar `idempotently` e `idempotente`; o contrato protegido permaneceu intacto.
+- `node .github/scripts/grade-step.mjs step3-api`: aprovado após implementar atividades, equipes, placar e sugestões.
 - `npm run seed --prefix octofit-tracker/backend`: executado duas vezes; ambas concluíram sem erro. O banco terminou com 2 pessoas, 2 equipes, 2 atividades e 2 treinos.
 - Compilação do backend: `npm run build --prefix octofit-tracker/backend` passou.
-- Testes da API: `npm run test:api --prefix octofit-tracker/backend` (pendente para a etapa 3).
+- Testes da API: `npm run test:api --prefix octofit-tracker/backend` passaram (4/4).
+- Verificação HTTP local: `GET /api/activities` retornou 200 e `POST /api/activities` com `{}` retornou 400.
 - Testes do frontend: `npm test --prefix octofit-tracker/frontend` (pendente para a etapa 4).
 - Compilação do frontend: `npm run build --prefix octofit-tracker/frontend` (pendente para a etapa 4).
